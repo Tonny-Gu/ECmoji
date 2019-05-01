@@ -4,18 +4,18 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>proj.ecmoji</groupId>
-  <artifactId>ECmoji</artifactId>
+  <groupId>spring2019</groupId>
+  <artifactId>spring2019</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>ECmoji</name>
+  <name>spring2019</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -25,6 +25,26 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>11.0.2</version>
+    </dependency>
+
+    <dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-fxml</artifactId>
+    <version>11.0.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+    <dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.11.3</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -71,5 +91,16 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>src/main/java</directory>
+        <includes>
+            <include>**/*.fxml</include>
+        </includes>             
+      </resource>
+    </resources>
+
   </build>
 </project>
