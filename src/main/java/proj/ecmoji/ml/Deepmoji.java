@@ -17,11 +17,11 @@ public class Deepmoji {
     private static int serverPort;
     private static Socket client;
     private static void initialize() throws Exception {
-        try(Scanner scanner = new Scanner(new File("config/server_name.txt"))) {
+        try(Scanner scanner = new Scanner(new File("server/server_name.txt"))) {
             serverName = scanner.next();
         } catch(Exception e) {throw(e);}
 
-        try(Scanner scanner = new Scanner(new File("config/server_socket_port.txt"))) {
+        try(Scanner scanner = new Scanner(new File("server/server_socket_port.txt"))) {
             serverPort = Integer.valueOf(scanner.next());
         } catch(Exception e) {throw(e);}
     }

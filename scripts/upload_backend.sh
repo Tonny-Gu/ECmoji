@@ -1,7 +1,7 @@
 #!/bin/bash
 
-addr="root@server8.sustc.dev3.cn"
-port=1122
+addr=$(cat ../secret/server_address.txt)
+port=$(cat ../secret/server_ssh_port.txt)
 
 remote_exec()
 {
@@ -10,6 +10,7 @@ remote_exec()
 }
 
 scp -P $port -r ../backend $addr:~/DeepMoji/
+scp -P $port -r ../secret $addr:~/DeepMoji/
 scp -P $port -r ../config $addr:~/DeepMoji/
 remote_exec "ps -ef | grep python | awk '{print \$2}' | xargs kill -9"
 sleep 2

@@ -33,7 +33,7 @@ listenAddress = ("0.0.0.0", 1101)
 
 def initialize():
     try:
-        cfgFile = open("config/server_socket_port.txt")
+        cfgFile = open("secret/server_socket_port.txt")
         listenAddress = ("0.0.0.0", int(cfgFile.read()))
     finally:
         if cfgFile: cfgFile.close()
