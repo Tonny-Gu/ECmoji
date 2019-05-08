@@ -2,8 +2,9 @@ package proj.ecmoji.data;
 
 import java.util.List;
 
-public class Commodity{
+public class Product{
     private String name, url;
     private List<Comment> comments; 
-    private long updatedTime;
+    private long latestCommentTime;
+    private long earliestCommentTime;
 }

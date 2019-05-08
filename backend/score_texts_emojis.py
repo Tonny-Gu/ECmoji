@@ -47,7 +47,7 @@ def scoreTexts(TEST_SENTENCES):
         t_score["text"] = t
         t_prob = prob[i]
         ind_top = top_elements(t_prob, 5)
-        t_score["prob"]=sum(t_prob[ind_top])
+        #t_score["prob"]=sum(t_prob[ind_top])
 
         emoji_score = {}
         for ind in ind_top:

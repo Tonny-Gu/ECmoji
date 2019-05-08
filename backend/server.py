@@ -33,17 +33,13 @@ listenAddress = ("0.0.0.0", 1101)
 
 def initialize():
     try:
-        cfgFile = open("secret/server_socket_port.txt")
-        listenAddress = ("0.0.0.0", int(cfgFile.read()))
+        configFile = open("secret/server_socket_port.txt")
+        listenAddress = ("0.0.0.0", int(configFile.read()))
     finally:
-        if cfgFile: cfgFile.close()
+        if configFile: configFile.close()
 
 def scoreTexts(comments):
-    TEST_SENTENCES = []
-    for comment in comments:
-        TEST_SENTENCES.append(comment["text"])
-    
-    result = deepmoji.scoreTexts(TEST_SENTENCES)
+    result = deepmoji.scoreTexts(comments)
     return result
 
 if __name__ == "__main__":

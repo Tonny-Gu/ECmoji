@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.alibaba.fastjson.JSON;
@@ -37,13 +38,18 @@ public class Deepmoji {
         Scanner receive = new Scanner(in);
         String rel = receive.next();
         
+        receive.close();
         client.close();
         return rel;
     }
-    public static String scoreComments(ArrayList<Comment> comments) throws Exception{
-        //return JSON.toJSONString(comments);
-        String JSONstring = JSON.toJSONString(comments);
-        System.out.println(JSONstring);
+    public static String scoreComments(List<Comment> comments) throws Exception{
+        ArrayList<String> sentences = new ArrayList<>();
+        for(Comment e: comments) {
+            if(e.getEngText()==null || "".equals(e.getEngText())) continue;
+            if(e.getScore()!=null) continue;
+            sentences.add(e.getEngText());
+        }
+        String JSONstring = JSON.toJSONString(sentences);
         return callServer(JSONstring);
         
     }
@@ -52,7 +58,7 @@ public class Deepmoji {
         ArrayList<Comment> list = new ArrayList<>();
         list.add(new Comment("happy"));
         list.add(new Comment("puppy"));
-
+        
         System.out.println(scoreComments(list));
     }
 }
