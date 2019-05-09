@@ -3,6 +3,8 @@ package proj.ecmoji.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import proj.ecmoji.util.TimeFormatConverter;
+
 public class Comment {
     private final String content;
     private final List<String> imageURL, videoURL;
@@ -37,5 +39,15 @@ public class Comment {
     @Override
     public int hashCode() {
         return content.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return ownerName + ": " + content + " @" + TimeFormatConverter.LongToJDFormat(commentTime);
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+        
     }
 }
