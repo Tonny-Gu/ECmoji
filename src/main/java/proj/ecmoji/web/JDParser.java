@@ -75,6 +75,9 @@ public class JDParser {
     }
     public static void main(String[] args) throws Exception {
         List<Comment> comments = getComments( getCommentURL("https://item.jd.com/5089255.html#comment", 2));
-        comments.forEach(System.out::println);
+        comments.forEach(e->{
+            System.out.println(e);
+            e.getVideoURL().forEach(System.out::println);
+        });
     }
 }

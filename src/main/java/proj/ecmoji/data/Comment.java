@@ -44,7 +44,7 @@ public class Comment {
     @Override
     public String toString() {
         try {
-            return ownerName + ": " + content + " @" + TimeFormatConverter.LongToJDFormat(commentTime);
+            return ownerName + ": " + content + " @ " + TimeFormatConverter.LongToJDFormat(commentTime);
         } catch(Exception e) {
             throw new RuntimeException(e);
         }
