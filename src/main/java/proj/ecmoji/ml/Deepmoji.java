@@ -4,13 +4,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
-import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import proj.ecmoji.data.DeepmojiScore;
 import proj.ecmoji.util.TXTtokenLoader;
 
 public class Deepmoji {
@@ -37,26 +38,25 @@ public class Deepmoji {
 
         InputStream in = client.getInputStream();
         Scanner receive = new Scanner(in);
-        String rel = receive.next();
+        String rel = receive.nextLine();
         
         receive.close();
         client.close();
         return rel;
     }
     public static List<DeepmojiScore> scoreSentences(List<String> sentences) throws Exception{
-        String sentMessage = JSON.toJSONString(sentences);
+        Gson gson = new Gson();
+        String sentMessage = gson.toJson(sentences);
         String recvMessage = callServer(sentMessage);
-        return JSON.parseArray(recvMessage, DeepmojiScore.class);
+        //System.out.println(recvMessage);
+        return gson.fromJson(recvMessage, new TypeToken<List<DeepmojiScore>>(){}.getType());
     }
-}
-class DeepmojiScore {
-    private final String text;
-    private final Map<Integer, Double> score;
-    public DeepmojiScore(String text, Map<Integer, Double> score) {
-        this.text = text;
-        this.score = new TreeMap<>();
-        score.putAll(score);
+    public static DeepmojiScore scoreSentence(String sentence) throws Exception {
+        List<String> sentences = new ArrayList<>();
+        sentences.add(sentence);
+        return scoreSentences(sentences).get(0);
     }
-    public String getText() {return text;}
-    public Map<Integer, Double> getScore() {return score;}
+    public static void main(String[] args) throws Exception {
+        System.out.println( scoreSentence( "Fuck you, asshole!" ) );
+    }
 }

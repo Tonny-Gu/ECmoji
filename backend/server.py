@@ -32,6 +32,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 listenAddress = ("0.0.0.0", 1101)
 
 def initialize():
+    configFile = None
     try:
         configFile = open("secret/server_socket_port.txt")
         listenAddress = ("0.0.0.0", int(configFile.read()))

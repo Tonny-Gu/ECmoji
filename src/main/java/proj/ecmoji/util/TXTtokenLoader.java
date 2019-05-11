@@ -9,4 +9,9 @@ public class TXTtokenLoader {
             return scanner.next();
         } catch(Exception e) {throw(e);}
     }
+    public static String readLine(String path) throws Exception {
+        try(Scanner scanner = new Scanner(new File(path))) {
+            return scanner.nextLine();
+        } catch(Exception e) {throw(e);}
+    }
 }

@@ -5,18 +5,20 @@ import java.util.Map;
 
 public class ScoredComment extends Comment{
     private final String engText;
-    private final Map<Integer, Double> score;
-    public ScoredComment(String engText, Map<Integer, Double> score, Comment comment) {
+    private final Map<String, Double> score;
+    public ScoredComment(String engText, Map<String, Double> score, Comment comment) {
         super(comment.getContent(),
             comment.getImageURL(),
             comment.getVideoURL(),
             comment.getCommentTime(),
             comment.getOwnerName(),
-            comment.getOwnerImage());
+            comment.getOwnerImage(),
+            comment.getProductSize(),
+            comment.getProductColor());
         this.engText = engText;
         this.score = new LinkedHashMap<>();
-        score.putAll(score);
+        this.score.putAll(score);
     }
     public String getEngText() {return engText;}
-    public Map<Integer, Double> getScore() {return score;}
+    public Map<String, Double> getScore() {return score;}
 }

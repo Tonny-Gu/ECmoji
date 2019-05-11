@@ -16,24 +16,26 @@ from deepmoji.sentence_tokenizer import SentenceTokenizer
 from deepmoji.model_def import deepmoji_emojis
 from deepmoji.global_variables import PRETRAINED_PATH, VOCAB_PATH
 
+maxlen = 30
+batch_size = 32
+model = None
 
-
+with open(VOCAB_PATH, 'r') as f:
+    vocabulary = json.load(f)
 
 def top_elements(array, k):
     ind = np.argpartition(array, -k)[-k:]
     return ind[np.argsort(array[ind])][::-1]
 
 def scoreTexts(TEST_SENTENCES):
-    maxlen = 30
-    batch_size = 32
+    global vocabulary, model
 
-    with open(VOCAB_PATH, 'r') as f:
-        vocabulary = json.load(f)
     st = SentenceTokenizer(vocabulary, maxlen)
     tokenized, _, _ = st.tokenize_sentences(TEST_SENTENCES)
 
-    model = deepmoji_emojis(maxlen, PRETRAINED_PATH)
-    model.summary()
+    if model == None:
+        model = deepmoji_emojis(maxlen, PRETRAINED_PATH)
+        model.summary()
 
     prob = model.predict(tokenized)
 
