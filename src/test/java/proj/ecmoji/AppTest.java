@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import proj.ecmoji.util.EmojiPrinter;
 import proj.ecmoji.web.JDParser;
 
 /**
@@ -18,7 +19,7 @@ public class AppTest
     public void shouldAnswerWithTrue()
     {
         try {
-            //JDParser.main(null);
+            EmojiPrinter.main(null);
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
             assertTrue( false );
