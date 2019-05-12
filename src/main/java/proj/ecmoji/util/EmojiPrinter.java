@@ -37,6 +37,7 @@ public class EmojiPrinter {
                     System.out.println();
                 });
                 System.out.println();
+                try {Thread.sleep(500);} catch(Exception ex) {}
             });
             System.out.println("\n");
         });
