@@ -15,4 +15,4 @@ scp -P $port -r ../config $addr:~/DeepMoji/
 remote_exec "ps -ef | grep python | awk '{print \$2}' | xargs kill -9"
 #sleep 2
 #remote_exec "ps -ef | grep python | awk '{print \$2}' | xargs kill -9"
-#remote_exec "bash ~/DeepMoji/backend/entrypoint.sh"
+remote_exec "bash ~/DeepMoji/backend/entrypoint.sh"
