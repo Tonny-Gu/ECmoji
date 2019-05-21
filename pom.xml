@@ -45,18 +45,6 @@
     <version>1.11.3</version>
     </dependency>
 
-    <dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>1.2.57</version>
-    </dependency>
-
-    <dependency>
-    <groupId>cn.miludeer</groupId>
-    <artifactId>jsoncode</artifactId>
-    <version>1.2.4</version>
-    </dependency>
-
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
     <dependency>
     <groupId>com.google.code.gson</groupId>

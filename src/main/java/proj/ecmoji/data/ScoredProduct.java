@@ -18,10 +18,10 @@ public class ScoredProduct extends Product {
         this.comments.addAll(comments);
         this.lastGotPage = lastGotPage;
     }
-    public ScoredProduct(List<ScoredComment> comments,
+    /*public ScoredProduct(List<ScoredComment> comments,
             long latestCommentTime, long earliestCommentTime, Product product) {
         this(comments, latestCommentTime, earliestCommentTime, -1, product);
-    }
+    }*/
     public long getLatestCommentTime() {return latestCommentTime;}
     public long getEarliestCommentTime() {return earliestCommentTime;}
     public void setLatestCommentTime(long latestCommentTime) {
@@ -33,4 +33,13 @@ public class ScoredProduct extends Product {
     public List<ScoredComment> getComments() {return comments;}
     public int getLastGotPage() {return lastGotPage;}
     public void setLastGotPage(int lastGotPage) {this.lastGotPage = lastGotPage;}
+
+    @Override
+    public ScoredProduct clone() throws CloneNotSupportedException {
+        return new ScoredProduct(this.getComments(),
+            this.getLatestCommentTime(),
+            this.getEarliestCommentTime(),
+            this.getLastGotPage(),
+            this);
+    }
 }

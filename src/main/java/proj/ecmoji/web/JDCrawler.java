@@ -2,6 +2,7 @@ package proj.ecmoji.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import proj.ecmoji.data.Comment;
 import proj.ecmoji.data.Product;
@@ -24,15 +25,42 @@ public class JDCrawler {
         long earliestCommentTime = scoredComments.get(scoredComments.size()-1).getCommentTime();
         return new ScoredProduct(scoredComments, latestCommentTime, earliestCommentTime, maxPage, product);
     }
+    public static ScoredProduct getComments(Product product, int page) throws Exception {
+        return getComments(product, page, page+1);
+    }
     public static ScoredProduct getAllComments(Product product) throws Exception {
         return getComments(product, 0, JDParser.getCommentsMaxPage(product.getURL()));
     }
-
-    public static void updateCommentsInStorage() {
-
+    public static ScoredProduct getAllComments(String productURL) throws Exception {
+        return getAllComments( JDParser.getProductInfo(productURL) );
+    }
+    public static ScoredProduct updateComment(ScoredProduct product) throws Exception {
+        ScoredProduct newProduct = product.clone();
+        for(int page=0; page<JDParser.getCommentsMaxPage(product.getURL()); ++page) {
+            ScoredProduct partical = getComments(product, page);
+            if(partical.getLatestCommentTime()>newProduct.getLatestCommentTime()) {
+                newProduct.setLatestCommentTime( partical.getLatestCommentTime() );
+            }
+            boolean exitFlag = false;
+            for(ScoredComment comment: partical.getComments()) {
+                if(comment.getCommentTime()>product.getLatestCommentTime()) newProduct.getComments().add(comment);
+                else exitFlag = true;
+            }
+            if(exitFlag) break;
+        }
+        return newProduct;
+    }
+    public static void updateCommentsInStorage() throws Exception {
+        Set<ScoredProduct> products = StorageServer.getProductList();
+        for(ScoredProduct product: products) {
+            System.out.printf("======Current Product: %s======\n", product.toString());
+            products.remove(product);
+            products.add(updateComment(product));
+        }
     }
     public static void main(String[] args) throws Exception {
-        StorageServer.addProduct( getComments(JDParser.getProductInfo("https://item.jd.com/5089255.html#none"), 0, 50) );
+        StorageServer.load();
+        updateCommentsInStorage();
         StorageServer.save();
     }
 }
